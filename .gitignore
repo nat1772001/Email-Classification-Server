@@ -1,5 +1,5 @@
-/pyvenv.cfg
-/__pycache__/*
-/Include/*
-/Lib/*
-/Scripts/*
+/server/pyvenv.cfg
+/server/__pycache__/*
+/server/Include/*
+/server/Lib/*
+/server/Scripts/*
