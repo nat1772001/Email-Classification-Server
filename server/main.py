@@ -74,7 +74,7 @@ def get_models():
 
 
 @app.route('/models/<id>', methods=['GET'])
-def get_one_user(id: str):
+def get_one_model(id: str):
     model = Model.objects.get_or_404(id=id)
     return jsonify(model), 200
 
