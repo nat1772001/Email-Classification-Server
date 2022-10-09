@@ -64,7 +64,7 @@ def delete_user(id):
     user.delete()
     return jsonify({"Message": f"Deleted {str(user.id)}" }), 200
 
-
+###
 # Model routes
 @app.route('/models', methods=['GET'])
 def get_models():
