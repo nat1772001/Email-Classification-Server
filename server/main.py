@@ -28,7 +28,6 @@ class Example(db.Document):
     subject = db.StringField()
     content = db.StringField()
     label = db.ReferenceField(Label)
-### 
 
 class User(db.Document):
     name = db.StringField()
