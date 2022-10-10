@@ -1,3 +1,4 @@
+from pickle import GET
 from flask import Flask, jsonify, request
 from flask_mongoengine import MongoEngine
 
@@ -97,5 +98,38 @@ def delete_model(id):
     model.delete()
     return jsonify({"Message": f"Deleted {str(model.id)}" }), 200
 ####################################################################################
+
+# Example routes
+@app.route('/example',methods=['GET'])
+def get_example():
+    example = Example.objects()
+    return jsonify(example), 200
+
+
+@app.route('/example/<id>', methods=['GET'])
+def get_one_example(id: str):
+    example = Example.objects.get_or_404(id=id)
+    return jsonify(example), 200
+
+@app.route('/example', methods=['POST'])
+def create_example():
+    body = request.get_json()
+    example = Example(**body).save()
+    return jsonify(example), 201
+
+@app.route('/example/<id>', methods=['PUT'])
+def update_example(id):
+    body = request.get_json()
+    example = Example.objects.get_or_404(id=id)
+    example.update(**body)
+    return jsonify({"Message": f"Updated {str(example.id)}" }), 200
+
+@app.route('/example/<id>', methods=['DELETE'])
+def delete_example(id):
+    example = Example.objects.get_or_404(id=id)
+    example.delete()
+    return jsonify({"Message": f"Deleted {str(example.id)}" }), 200
+
+#######################################################
 if __name__ == "__main__":
     app.run(debug=True)
