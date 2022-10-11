@@ -65,7 +65,7 @@ def delete_user(id):
     user.delete()
     return jsonify({"Message": f"Deleted {str(user.id)}" }), 200
 
-
+###
 # Model routes
 @app.route('/models', methods=['GET'])
 def get_models():
@@ -96,6 +96,39 @@ def delete_model(id):
     model = Model.objects.get_or_404(id=id)
     model.delete()
     return jsonify({"Message": f"Deleted {str(model.id)}" }), 200
+
+####################################################################################
+# label router  
+@app.route('/labels', methods=['GET'])
+def get_labels():
+    label = Label.objects()
+    return jsonify(label), 200
+
+
+@app.route('/label/<id>', methods=['GET'])
+def get_one_label(id: str):
+    label = Label.objects.get_or_404(id=id)
+    return jsonify(label), 200
+
+@app.route('/label', methods=['POST'])
+def creat_label():
+    body = request.get_json()
+    label = Label(**body).save()
+    return jsonify(label), 201
+
+@app.route('/label/<id>', methods=['PUT'])
+def update_label(id):
+    body = request.get_json()
+    label = Label.objects.get_or_404(id=id)
+    label.update(**body)
+    return jsonify({"Message": f"Updated {str(label.id)}" }), 200
+
+@app.route('/label/<id>', methods=['DELETE'])
+def delete_label(id):
+    label = Label.objects.get_or_404(id=id)
+    label.delete()
+    return jsonify({"Message": f"Deleted {str(label.id)}" }), 200
+
 ####################################################################################
 
 # Example routes
