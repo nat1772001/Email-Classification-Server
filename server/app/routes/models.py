@@ -1,3 +1,5 @@
+import os
+import datetime
 from flask import jsonify, request, Blueprint
 from app.models.Model import Model
 from app.models.Example import Example
@@ -21,13 +23,15 @@ def get_one_model(id: str):
 @models_blueprint.route('/models', methods=['POST'])
 def create_model():
     examples = Example.objects()
-    X_data, y_data = preprocessing_data(examples)
+    now = (datetime.datetime.now()).strftime("%d_%m_%Y_%H_%M_%S")
+    X_data, y_data = preprocessing_data(examples, now)
     X_data, y_data = feature_engineering(X_data, y_data)
-    path, acc_score, pre_score, rec_score, f1_score = train_model(
-        X_data, y_data)
+    acc_score, pre_score, rec_score, f1_score = train_model(
+        X_data, y_data, now)
     model = Model(
         example_quantity=len(examples),
-        path=path,
+        data_path=f'{os.getenv("TRAIN_DATA_PATH")}/{now}.pkl',
+        model_path=f'{os.getenv("TRAIN_MODEL_PATH")}/{now}.pkl',
         accuracy=acc_score,
         precision=pre_score,
         recall=rec_score,

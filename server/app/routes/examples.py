@@ -3,6 +3,7 @@ from app.models.Example import Example
 
 examples_blueprint = Blueprint('examples_blueprint', __name__)
 
+
 @examples_blueprint.route('/examples', methods=['GET'])
 def get_examples():
     examples = Example.objects()
