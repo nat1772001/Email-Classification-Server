@@ -3,3 +3,5 @@
 /server/Include/*
 /server/Lib/*
 /server/Scripts/*
+/server/machine_learning_data/*
+/server/machine_learning_models/*
