@@ -5,3 +5,5 @@
 /server/Scripts/*
 /server/machine_learning_data/*
 /server/machine_learning_models/*
+/server/app/__pycache__/*
+/server/app/routes/__pycache__/*

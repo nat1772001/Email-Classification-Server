@@ -10,7 +10,6 @@ models_blueprint = Blueprint('models_blueprint', __name__)
 @models_blueprint.route('/models', methods=['GET'])
 def get_models():
     models = Model.objects()
-    preprocessing_data(models)
     return jsonify(models), 200
 
 

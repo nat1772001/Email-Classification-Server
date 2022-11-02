@@ -4,6 +4,7 @@ load_dotenv()
 import os
 from flask import Flask
 from flask_mongoengine import MongoEngine
+from flask_cors import CORS
 
 from app.routes.examples import examples_blueprint
 from app.routes.labels import labels_blueprint
@@ -11,6 +12,10 @@ from app.routes.models import models_blueprint
 from app.routes.classification import classification_blueprint
 
 app = Flask(__name__)
+
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 app.config['MONGODB_SETTINGS'] = {
     'db': os.getenv("DB"),
     'host': os.getenv("HOST"),

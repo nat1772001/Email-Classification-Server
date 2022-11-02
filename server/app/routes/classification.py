@@ -23,6 +23,7 @@ def classify():
             receiver=email.get("receiver"),
             subject=email.get("subject"),
             content=email.get("content"),
+            date=email.get("date"),
             label=ObjectId(label[10:34]),
         )
         example.save()
